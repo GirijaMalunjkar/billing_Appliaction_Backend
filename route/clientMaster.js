@@ -1,0 +1,97 @@
+var express = require('express');
+var clientMaster = express.Router();
+
+const pool = require('../models/database');
+
+clientMaster.get("/clientMaster", (req, res) => {
+    var sql = "SELECT * FROM  client_master";
+    pool.query(sql, function (error, result) {
+        if (error) {
+            console.log("Error Connecting to DB")
+        } else {
+            res.send({ status: true, data: result });
+        }
+    });
+});
+
+clientMaster.get("/clientMaster/:id", (req, res) => {
+    var clientMasterid = req.params.id;
+    var sql = "SELECT FROM * client_master WHERE id=" + clientMasterid;
+    pool.query(sql, function (error, result) {
+        if (error) {
+            console.log("Error Connecting to DB")
+        } else {
+            res.send({ status: true, data: result });
+        }
+    });
+});
+
+clientMaster.post('/clientMaster', (req, res) => {
+    let details = {
+        name: req.body.name,
+        phone: req.body.phone,
+        email: req.body.email,
+        billing_address: req.body.billing_address,
+        gst: req.body.gst,
+        created_by: 0,
+        status: 'active',
+
+    };
+    let sql = "INSERT INTO client_master SET ?";
+    pool.query(sql, details, (error) => {
+        console.log(error);
+        if (error) {
+            res.send({ status: false, message: "ClientMaster Created Fail" });
+        } else {
+            res.send({ status: true, message: "ClientMaster Created Successfully" });
+        }
+    })
+});
+
+clientMaster.put("/clientMaster/:id", (req, res) => {
+    let sql =
+        "UPDATE client_master SET name='" + req.body.name + 
+        "', phone= '" +  req.body.phone +
+        "', email= '" +  req.body.email +
+        "', billing_address= '" +  req.body.billing_address +
+        "', gst= '" +  req.body.gst +
+        "' WHere id=" + req.params.id;
+
+    let query = pool.query(sql, (error, result) => {
+        if (error) {
+            res.send({
+                status: false, message: "ClientMaster Update Failed"
+            });
+        } else {
+            res.send({
+                status: true, message: "ClientMaster Update Successfully"
+            });
+        }
+    });
+});
+
+
+clientMaster.delete("/clientMaster/:id", (req, res) => {
+    let sql =
+        "UPDATE client_master SET name='" + req.body.name + 
+        "', phone= '" +  req.body.phone +
+        "', email= '" +  req.body.email +
+        "', billing_address= '" +  req.body.billing_address +
+        "', gst= '" +  req.body.gst +
+        "', status= 'inactive' WHere id=" + req.params.id;
+
+    let query = pool.query(sql, (error, result) => {
+        if (error) {
+            console.log(error);
+            res.send({
+                status: false, message: "ClientMaster Deleted Failed"
+            });
+        } else {
+            res.send({
+                status: true, message: "ClientMaster Deleted Successfully"
+            });
+        }
+    });
+});
+
+module.exports = clientMaster;
