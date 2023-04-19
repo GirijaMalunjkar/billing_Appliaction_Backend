@@ -40,8 +40,7 @@ sales.post('/sales', (req, res) => {
         bill_date: req.body.bill_date,
         due_date: req.body.due_date,
         invoice_no: req.body.invoice_no,
-        company_id: req.body.company_id,
-        created_by: 0,
+        created_by: 1,
         status: 'active',
     };
     let sql = "INSERT INTO sales SET ?";
@@ -68,8 +67,7 @@ sales.put("/sales/:id", (req, res) => {
     "', grandtotal= '" +  req.body.grandtotal +
     "', bill_date= '" +  req.body.bill_date +
     "', due_date= '" +  req.body.due_date +
-    "', invoice_id= '" +  req.body.invoice_no +
-    "', company_id= '" +  req.body.company_id +
+    "', invoice_no= '" +  req.body.invoice_no +
     "', WHere id=" +  req.params.id;
 
     let query = pool.query(sql, (error, result) => {
@@ -98,7 +96,7 @@ sales.delete("/sales/:id", (req, res) => {
     "', grandtotal= '" +  req.body.grandtotal +
     "', bill_date= '" +  req.body.bill_date +
     "', due_date= '" +  req.body.due_date +
-    "', invoice_id= '" +  req.body.invoice_no +
+    "', invoice_no= '" +  req.body.invoice_no +
     "', company_id= '" +  req.body.company_id +
     "', status= 'inactive' WHere id=" +  req.params.id;
 
@@ -114,4 +112,18 @@ sales.delete("/sales/:id", (req, res) => {
         }
     });
 });
+
+sales.get('/sales/:id', (req, res) => {
+    //let sql = 'SELECT si.id, i.item, s.id as salesid FROM items i JOIN sales_items si ON i.id = si.item_id JOIN sales s ON s.id = si.sale_id WHERE si.id = ?';
+
+    let query = pool.query(sql, (err, res) => {
+        console.log(err);
+        if (err) {
+            res.send({message:"error"});
+        } else {
+            res.send({ Message: "Joined Succussesfully" });
+        }
+    });
+});
+
 module.exports = sales;

@@ -29,11 +29,12 @@ salesItems.get("/salesItems/:id", (req, res) => {
 salesItems.post('/salesItems', (req, res) => {
     let details = {
         sale_id: req.body.sale_id,
-        item: req.body.item,
+        item_id: req.body.item_id,
         rate: req.body.rate,
         qty: req.body.qty,
         gst: req.body.gst,
         total: req.body.total,
+        created_by: 1,
     };
     let sql = "INSERT INTO sales_items SET ?";
     pool.query(sql, details, (error) => {
@@ -48,14 +49,13 @@ salesItems.post('/salesItems', (req, res) => {
 
 salesItems.put("/salesItems/:id", (req, res) => {
     let sql =
-    "UPDATE sales_items SET sale_id='" + req.body.sale_id + 
-    "', item= '" +  req.body.item +
-    "', email= '" +  req.body.email +
-    "', rate= '" +  req.body.rate +
-    "', qty= '" +  req.body.qty +
-    "', gst= '" +  req.body.gst +
-    "', total= '" +  req.body.total +
-    "' WHere id=" +  req.params.id;
+        "UPDATE sales_items SET item= '" + req.body.item +
+        "', email= '" + req.body.email +
+        "', rate= '" + req.body.rate +
+        "', qty= '" + req.body.qty +
+        "', gst= '" + req.body.gst +
+        "', total= '" + req.body.total +
+        "' WHere id=" + req.params.id;
 
     let query = pool.query(sql, (error, result) => {
         if (error) {
@@ -72,14 +72,13 @@ salesItems.put("/salesItems/:id", (req, res) => {
 
 salesItems.delete("/salesItems/:id", (req, res) => {
     let sql =
-    "UPDATE sales_items SET sale_id='" + req.body.sale_id + 
-    "', item= '" +  req.body.item +
-    "', email= '" +  req.body.email +
-    "', rate= '" +  req.body.rate +
-    "', qty= '" +  req.body.qty +
-    "', gst= '" +  req.body.gst +
-    "', total= '" +  req.body.total +
-    "', status= 'inactive' WHere id=" +  req.params.id;
+        "UPDATE sales_items SET item= '" + req.body.item +
+        "', email= '" + req.body.email +
+        "', rate= '" + req.body.rate +
+        "', qty= '" + req.body.qty +
+        "', gst= '" + req.body.gst +
+        "', total= '" + req.body.total +
+        "', status= 'inactive' WHere id=" + req.params.id;
 
     let query = pool.query(sql, (error, result) => {
         if (error) {
@@ -93,4 +92,18 @@ salesItems.delete("/salesItems/:id", (req, res) => {
         }
     });
 });
+
+salesItems.get('/salesItems/:id', (req, res) => {
+    let sql = 'SELECT si.id, i.item, s.id as salesid FROM items i JOIN sales_items si ON i.id = si.item_id JOIN sales s ON s.id = si.sale_id WHERE si.id = ?';
+
+    let query = pool.query(sql, (err, res) => {
+        console.log(err);
+        if (err) {
+            res.send({message:"error"});
+        } else {
+            res.send({ Message: "Joined Succussesfully" });
+        }
+    });
+});
+
 module.exports = salesItems;

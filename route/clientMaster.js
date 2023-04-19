@@ -94,4 +94,17 @@ clientMaster.delete("/clientMaster/:id", (req, res) => {
     });
 });
 
+clientMaster.get('/clientMaster/:id', (req, res) => {
+    //let sql = 'SELECT si.id, i.item, s.id as salesid FROM items i JOIN sales_items si ON i.id = si.item_id JOIN sales s ON s.id = si.sale_id WHERE si.id = ?';
+
+    let query = pool.query(sql, (err, res) => {
+        console.log(err);
+        if (err) {
+            res.send({message:"error"});
+        } else {
+            res.send({ Message: "Joined Succussesfully" });
+        }
+    });
+});
+
 module.exports = clientMaster;
