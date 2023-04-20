@@ -27,6 +27,32 @@ clientMaster.get("/clientMaster/:id", (req, res) => {
 });
 
 clientMaster.post('/clientMaster', (req, res) => {
+        /*let map = {
+        invoice_no: req.body.invoice_no,
+        bill_date: req.body.bill_date,
+        cname: req.body.cname,
+        items: req.body.items,
+        total: req.body.total, 
+        discount: req.body.discount,
+        recived: req.body.recived,
+        balance: req.body.balance,
+        note: req.body.note,
+    }
+    let sql =
+    "UPDATE billing SET ? WHere id=" + req.params.id;
+
+    let query = pool.query(sql, map, (error, result) => {
+        if (error) {
+            res.send({
+                status: false, message: "Billing Update Failed"
+            });
+        } else {
+            res.send({
+                status: true, message: "Billing Update Successfully"
+            });
+        }
+    });*/
+    
     let details = {
         name: req.body.name,
         phone: req.body.phone,

@@ -113,8 +113,8 @@ sales.delete("/sales/:id", (req, res) => {
     });
 });
 
-sales.get('/sales/:id', (req, res) => {
-    //let sql = 'SELECT si.id, i.item, s.id as salesid FROM items i JOIN sales_items si ON i.id = si.item_id JOIN sales s ON s.id = si.sale_id WHERE si.id = ?';
+sales.get('/getReport/:id', (req, res) => {
+    let sql = 'SELECT s.*, c.name, c.phone, c.email FROM sales AS s, client_master AS c WHERE c.id = s.cid';
 
     let query = pool.query(sql, (err, res) => {
         console.log(err);
