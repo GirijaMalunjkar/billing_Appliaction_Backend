@@ -40,6 +40,7 @@ sales.post('/sales', (req, res) => {
         bill_date: req.body.bill_date,
         due_date: req.body.due_date,
         invoice_no: req.body.invoice_no,
+        company_id: req.body.company_id,
         created_by: 1,
         status: 'active',
     };
@@ -68,6 +69,7 @@ sales.put("/sales/:id", (req, res) => {
     "', bill_date= '" +  req.body.bill_date +
     "', due_date= '" +  req.body.due_date +
     "', invoice_no= '" +  req.body.invoice_no +
+    "', company_id= '" +  req.body.company_id +
     "', WHere id=" +  req.params.id;
 
     let query = pool.query(sql, (error, result) => {
@@ -113,15 +115,15 @@ sales.delete("/sales/:id", (req, res) => {
     });
 });
 
-sales.get('/getReport/:id', (req, res) => {
-    let sql = 'SELECT s.*, c.name, c.phone, c.email FROM sales AS s, client_master AS c WHERE c.id = s.cid';
+sales.get('/getbillingReport/:id', (req, res) => {
+    let sql = 'SELECT c.name, c.phone, c.email, c.billing_address, c.gst_in_no, s.total, s.gst, s.discount, s.place_of_supply, s.cgst, s.sgst, s.igst, s.grandtotal, s.bill_date, s.due_date, p.name, p.address, p.phone, p.email, p.website, p.gst_in_no, p.logo, p.color_code FROM sales AS s, client_master AS c, profile AS p WHERE c.id = s.id = p.id';
 
-    let query = pool.query(sql, (err, res) => {
+    let query = pool.query(sql, (err, result) => {
         console.log(err);
         if (err) {
             res.send({message:"error"});
         } else {
-            res.send({ Message: "Joined Succussesfully" });
+            res.send({ Message: result });
         }
     });
 });

@@ -33,7 +33,7 @@ profile.post('/profile', (req, res) => {
         phone: req.body.phone,
         email: req.body.email,
         website: req.body.website,
-        gst: req.body.gst,
+        gst_in_no: req.body.gst_in_no,
         logo: req.body.logo,
     };
     let sql = "INSERT INTO profile SET ?";
@@ -54,7 +54,7 @@ profile.put("/profile/:id", (req, res) => {
     "', phone= '" +  req.body.phone +
     "', email= '" +  req.body.email +
     "', website= '" +  req.body.website +
-    "', gst= '" +  req.body.gst +
+    "', gst_in_no= '" +  req.body.gst_in_no +
     "', logo= '" +  req.body.logo +
     "' WHere id=" +  req.params.id;
 
@@ -78,7 +78,7 @@ profile.delete("/profile/:id", (req, res) => {
     "', phone= '" +  req.body.phone +
     "', email= '" +  req.body.email +
     "', website= '" +  req.body.website +
-    "', gst= '" +  req.body.gst +
+    "', gst_in_no= '" +  req.body.gst_in_no +
     "', logo= '" +  req.body.logo +
     "', status= 'inactive' WHere id=" +  req.params.id;
 

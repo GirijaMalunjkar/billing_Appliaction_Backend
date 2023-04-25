@@ -28,7 +28,14 @@ employee.get("/employee/:id", (req, res) => {
 
 employee.post('/employee', (req, res) => {
     let details = {
-       employee_name: req.body.employee_name
+       name: req.body.name,
+       phone: req.body.phone,
+       email: req.body.email,
+       address: req.body.address,
+       bank: req.body.bank,
+       account_no: req.body.account_no,
+       ifsc_no: req.body.ifsc_no,
+       id_proof: req.body.id_proof,
     };
     let sql = "INSERT INTO employee SET ?";
     pool.query(sql, details, (error) => {
@@ -43,7 +50,14 @@ employee.post('/employee', (req, res) => {
 
 employee.put("/employee/:id", (req, res) => {
     let sql =
-    "UPDATE employee SET employee_name='" + req.body.employee_name +
+    "UPDATE employee SET name='" + req.body.name +
+    "' phone='" + req.body.phone +
+    "' email='" + req.body.email +
+    "' address='" + req.body.address +
+    "' back='" + req.body.back +
+    "' account_no='" + req.body.account_no +
+    "' ifsc_no='" + req.body.ifsc_no +
+    "' id_proof='" + req.body.id_proof +
     "' WHere id=" +  req.params.id;
 
     let query = pool.query(sql, (error, result) => {
@@ -61,8 +75,16 @@ employee.put("/employee/:id", (req, res) => {
 
 employee.delete("/employee/:id", (req, res) => {
     let sql =
-    "UPDATE employee SET employee_name='" + req.body.employee_name + 
-    "', status= 'inactive' WHere id=" +  req.params.id;
+    "UPDATE employee SET name='" + req.body.name +
+    "' phone='" + req.body.phone +
+    "' email='" + req.body.email +
+    "' address='" + req.body.address +
+    "' back='" + req.body.back +
+    "' account_no='" + req.body.account_no +
+    "' ifsc_no='" + req.body.ifsc_no +
+    "' id_proof='" + req.body.id_proof +
+    "' status='inactive' WHere id=" +  req.params.id;
+
 
     let query = pool.query(sql, (error, result) => {
         if (error) {

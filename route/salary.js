@@ -29,10 +29,9 @@ salary.get("/salary/:id", (req, res) => {
 salary.post('/salary',(req, res) => {
     let details = {
         employee_id: req.body.employee_id,
-        employee_name: req.body.employee_name,
         salary_date: req.body.salary_date,
-        salary_ammount: req.body.salary_ammount,
-        salary_mode: req.body.salary_mode,
+        amount: req.body.amount,
+        mode: req.body.mode,
         created_by: 1,
         status: 'active',
     };
@@ -49,10 +48,10 @@ salary.post('/salary',(req, res) => {
 
 salary.put("/salary/:id", (req, res) => {
     let sql =
-        "UPDATE salary SET employee_name='" + req.body.employee_name +
-        "', employee_date='" + req.body.employee_date +
-        "', salary_ammount='" + req.body.salary_ammount +
-        "', salary_mode='" + req.body.salary_mode +
+        "UPDATE salary SET employee_id='" + req.body.employee_id +
+        "', salary_date='" + req.body.salary_date +
+        "', amount='" + req.body.amount +
+        "', mode='" + req.body.mode +
         "' WHere id=" + req.params.id;
 
     let query = pool.query(sql, (error, result) => {
@@ -70,10 +69,10 @@ salary.put("/salary/:id", (req, res) => {
 
 salary.delete("/salary/:id", (req, res) => {
     let sql =
-        "UPDATE salary SET employee_name='" + req.body.employee_name +
-        "', employee_date='" + req.body.employee_date +
-        "', salary_ammount='" + req.body.salary_ammount +
-        "', salary_mode='" + req.body.salary_mode +
+        "UPDATE salary SET employee_id='" + req.body.employee_id +
+        "', salary_date='" + req.body.salary_date +
+        "', amount='" + req.body.amount +
+        "', mode='" + req.body.mode +
         "', status= 'inactive' WHere id=" + req.params.id;
 
     let query = pool.query(sql, (error, result) => {
@@ -90,14 +89,14 @@ salary.delete("/salary/:id", (req, res) => {
 });
 
 salary.get('/getsalary/:id', (req, res) => {
-    let sql = 'SELECT e.* FROM employee AS e, salary AS s WHERE e.id = s.id';
+    var sql = 'SELECT e.name, e.phone, e.address, e.bank, e.account_no, e.ifsc_no, e.id_proof, s.* FROM salary AS s, employee AS e WHERE e.id = s.employee_id';
 
-    let query = pool.query(sql, (err, res) => {
+    var query = pool.query(sql, (err, result) => {
         console.log(err);
         if (err) {
             res.send({ message: "error" });
         } else {
-            res.send({ Message: "Joined Succussesfully" });
+            res.send({ Message: result , msg:"Joined Successfully"});
         }
     });
 });

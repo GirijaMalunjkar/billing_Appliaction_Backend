@@ -58,7 +58,7 @@ clientMaster.post('/clientMaster', (req, res) => {
         phone: req.body.phone,
         email: req.body.email,
         billing_address: req.body.billing_address,
-        gst: req.body.gst,
+        gst_in_no: req.body.gst_in_no,
         created_by: 0,
         status: 'active',
 
@@ -80,7 +80,7 @@ clientMaster.put("/clientMaster/:id", (req, res) => {
         "', phone= '" +  req.body.phone +
         "', email= '" +  req.body.email +
         "', billing_address= '" +  req.body.billing_address +
-        "', gst= '" +  req.body.gst +
+        "', gst_in_no= '" +  req.body.gst_in_no +
         "' WHere id=" + req.params.id;
 
     let query = pool.query(sql, (error, result) => {
@@ -103,7 +103,7 @@ clientMaster.delete("/clientMaster/:id", (req, res) => {
         "', phone= '" +  req.body.phone +
         "', email= '" +  req.body.email +
         "', billing_address= '" +  req.body.billing_address +
-        "', gst= '" +  req.body.gst +
+        "', gst_in_no= '" +  req.body.gst_in_no +
         "', status= 'inactive' WHere id=" + req.params.id;
 
     let query = pool.query(sql, (error, result) => {

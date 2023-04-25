@@ -88,4 +88,18 @@ items.delete("/items/:id", (req, res) => {
     });
 });
 
+items.get('/getitemsReport/:id', (req, res) => {
+    let sql = 'SELECT i.item, i.hsn, i.gst, i.rate, si.rate, si.qty, si.gst, si.total FROM items AS i, sales_items AS si WHERE i.id = si.id;';
+
+    let query = pool.query(sql, (err, result) => {
+        console.log(err);
+        if (err) {
+            res.send({message:"error"});
+        } else {
+            res.send({ Message: result });
+        }
+    });
+});
+
+
 module.exports = items;

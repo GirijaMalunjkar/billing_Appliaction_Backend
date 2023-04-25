@@ -1,0 +1,91 @@
+1)post method- http://13.234.213.107/api/clientMaster
+		{
+  "name":"qwerty",
+  "phone":"12345678909",
+  "email":"asd@gmail.com",
+  "billing_address":"asgfhgjhk",
+  "gst_in_no":"5%"
+}
+
+2)post method- http://13.234.213.107/api/employee
+
+{
+  "name": "qwerg",
+  "phone": "121212121",
+  "email": "qwe@gmail.com",
+  "address": "qwerg",
+  "bank": "qwerg",
+  "account_no": "1111111111",
+  "ifsc_no": "qw1234",
+  "id_proof": "qwerg1212"
+}
+
+3)post method- http://13.234.213.107/api/items
+
+{
+  "item": "qwer, qwert, sdfghj, sdfg",
+  "hsn": "1234567890",
+  "gst": "5%",
+  "rate": "234"
+}
+
+4) post method- http://13.234.213.107/api/profile
+
+{
+  "name":"sdfg",
+  "address":"qwertyu12 qwert",
+  "phone":"123456789009",
+  "email":"qwe@gmail.com",
+  "website":"wwww.rrr@co.org",
+  "gst_in_no":"5%",
+  "logo":"qwert",
+  "color_code":"#ffff"
+}
+
+5) post method- http://13.234.213.107/api/salary
+
+{
+  "employee_id":"1",
+  "employee_name":"qwerg",
+  "salary_date":"23-12-23",
+   "salary_ammount":"1213",
+   "salary_mode":"cash"
+  }
+
+6) post method- http://13.234.213.107/api/sales
+
+{
+      "cid": "1",
+      "total": "2345",
+      "gst":"15%",
+      "discount": "5%",
+      "place_of_supply":"akole",
+      "cgst":"5%",
+      "sgst":"5%",
+      "igst":"5%",
+      "grandtotal":"1000",
+      "bill_date":"12-1-2023",
+      "due_date":"12-11-2023",
+      "invoice_no":"122",
+      "company_id":"1"
+}
+
+7) post method- http://13.234.213.107/api//salesItems
+
+{
+      "rate": "2345",
+      "qty": "10",
+      "gst": "5%",
+      "total": "200",
+      "sale_id":"2",
+      "item_id":"1"
+}
+
+8)post method- http://13.234.213.107/api/expenses
+
+{
+  "item":"qwe, qwert, qwert,",
+  "amount":"234567",
+  "supplier_name":"jethalal",
+  "mode_of_payment":"cash"
+}

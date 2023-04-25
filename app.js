@@ -30,6 +30,7 @@ const salesItems = require('./route/salesItems');
 const profile = require('./route/profile');
 const salary = require('./route/salary');
 const employee = require('./route/employee');
+const expenses = require('./route/expenses');
 
 app.use('/api',clientMaster)
 app.use('/api',items)
@@ -38,5 +39,6 @@ app.use('/api',salesItems)
 app.use('/api',profile)
 app.use('/api',salary)
 app.use('/api',employee)
+app.use('/api',expenses)
 
 
